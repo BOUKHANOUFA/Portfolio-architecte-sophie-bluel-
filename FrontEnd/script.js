@@ -79,4 +79,45 @@ function setupFilters() {
     });
   });
 }
+const form = document.getElementById("login-form");
+const errorMsg = document.getElementById("error-msg");
 
+form.addEventListener("submit", async (e) => {
+  e.preventDefault(); // Empêche le rechargement de page
+
+  const email = form.email.value;
+  const password = form.password.value;
+
+  errorMsg.textContent = ""; // Réinitialise le message d'erreur
+
+  try {
+    const response = await fetch("http://localhost:5678/api/login", { // Mets ton URL
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok && data.token) {
+      // Connexion réussie
+      localStorage.setItem("token", data.token); // Stocke le token
+      window.location.href = "index.html";      // Redirige vers l'accueil
+    } else {
+      // Connexion échouée
+      errorMsg.textContent = "Email ou mot de passe incorrect";
+    }
+
+  } catch (error) {
+    console.error("Erreur :", error);
+    errorMsg.textContent = "Une erreur est survenue, réessayez plus tard";
+  }
+});
+
+const token = localStorage.getItem("token");
+
+if (token) {
+  console.log("Utilisateur connecté");
+} else {
+  console.log("Utilisateur non connecté");
+}

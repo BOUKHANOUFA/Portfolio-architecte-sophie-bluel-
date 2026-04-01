@@ -1,7 +1,7 @@
 let allWorks = [];
-fetch("http://localhost:5678/api/works")
+fetch ("http://localhost:5678/api/works")
 
-  .then(response => response.json())
+  .then (response => response.json())
   .then(data => {
       allWorks = data;      
     afficherTravaux(allWorks);
@@ -83,15 +83,15 @@ const form = document.getElementById("login-form");
 const errorMsg = document.getElementById("error-msg");
 
 form.addEventListener("submit", async (e) => {
-  e.preventDefault(); // Empêche le rechargement de page
+  e.preventDefault(); 
 
   const email = form.email.value;
   const password = form.password.value;
 
-  errorMsg.textContent = ""; // Réinitialise le message d'erreur
+  errorMsg.textContent = ""; 
 
   try {
-    const response = await fetch("http://localhost:5678/api/login", { // Mets ton URL
+    const response = await fetch("http://localhost:5678/api/login", { 
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -101,8 +101,8 @@ form.addEventListener("submit", async (e) => {
 
     if (response.ok && data.token) {
       // Connexion réussie
-      localStorage.setItem("token", data.token); // Stocke le token
-      window.location.href = "index.html";      // Redirige vers l'accueil
+      localStorage.setItem("token", data.token); 
+      window.location.href = "index.html";      
     } else {
       // Connexion échouée
       errorMsg.textContent = "Email ou mot de passe incorrect";

@@ -38,21 +38,21 @@ fetch("http://localhost:5678/api/categories")
   });
 
   function afficherCategories(categories) {
-  const filtersContainer = document.querySelector(".filters");
-  filtersContainer.innerHTML = "";
+  const filters = document.querySelector(".filters");
+  filters.innerHTML = "";
 
   const allButton = document.createElement("button");
   allButton.textContent = "Tous";
   allButton.classList.add("filter-btn", "active");
   allButton.dataset.id = "all";
-  filtersContainer.appendChild(allButton);
+  filters.appendChild(allButton);
 
   categories.forEach(category => {
     const button = document.createElement("button");
     button.textContent = category.name;
     button.classList.add("filter-btn");
     button.dataset.id = category.id;
-    filtersContainer.appendChild(button);
+    filters.appendChild(button);
   });
 
   setupFilters();

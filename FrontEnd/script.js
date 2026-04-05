@@ -79,3 +79,45 @@ function setupFilters() {
     });
   });
 }
+
+const modal = document.getElementById('modal1');
+const btnModifier = document.querySelector('a[href="#modal1"]');
+const closeBtn = modal.querySelector('.close');
+const zoneGalerie = modal.querySelector('.zone-galerie');
+const zoneFormulaire = modal.querySelector('.zone-formulaire');
+const btnAddPhoto = modal.querySelector('#btn-photo');
+const backBtn = modal.querySelector('.back');
+
+
+btnModifier.addEventListener('click', (e) => {
+    e.preventDefault();
+    modal.style.display = 'flex';
+});
+
+
+closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+    zoneFormulaire.style.display = 'none';
+    zoneGalerie.style.display = 'block';
+});
+
+
+window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+        zoneFormulaire.style.display = 'none';
+        zoneGalerie.style.display = 'block';
+    }
+});
+
+
+btnAddPhoto.addEventListener('click', () => {
+    zoneGalerie.style.display = 'none';
+    zoneFormulaire.style.display = 'block';
+});
+
+
+backBtn.addEventListener('click', () => {
+    zoneFormulaire.style.display = 'none';
+    zoneGalerie.style.display = 'block';
+});

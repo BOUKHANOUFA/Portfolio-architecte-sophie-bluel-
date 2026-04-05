@@ -39,16 +39,36 @@
 	<section id="portfolio">
 		<div class="projets-edit">
 		<h2>Mes Projets</h2>
-		
 		<i class=" group fa-regular fa-pen-to-square"></i>
 		<a href="#modal1">modifier</a>
 		</div>
 		<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal">
-			<div class="modal-wraper">
+			<div class="modal-wrapper">
+				<span class="close">x</span>
+				<div class="zone-galerie">
 				<h3 id="titlemodal">Galerie photo</h3>
+				<div class="gallery modal-gallery">
+            <div class="item">
+                <img src="img1.jpg" alt="projet">
+                <i class="fa-solid fa-trash-can"></i>
+            </div>
+        </div>
+
 				<div class="line1"></div>
-				<button class="btn1-modal">Ajouter une photo</button>
+				<button class="btn1-modal" id="btn-photo">Ajouter une photo</button>
 			</div>
+			 
+        <div class="zone-formulaire" style="display: none;">
+            <span class="back"&#8592;></span> 
+            <h3>Ajouter un travail</h3>
+            <form id="form-ajout">
+                <input type="text" name="titre" placeholder="Titre du projet">
+                <input type="url" name="image" placeholder="URL de l'image">
+                <button type="submit" class="btn1-modal">Valider</button>
+            </form>
+        </div>
+
+    </div>
 		</aside>
 		<div class="filters"></div>
 		<div class="gallery"></div>

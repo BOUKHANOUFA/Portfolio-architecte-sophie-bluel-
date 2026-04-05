@@ -201,6 +201,7 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
+
 footer nav ul {
   display: flex;
   justify-content: flex-end;
@@ -324,15 +325,30 @@ height: 15.58px;
 
 }
 .modal {
+
+
 position: fixed;
+display: flex;
+align-items: center;
+justify-content: center;
 top: 0;
 left: 0;
-border-radius: 10px;
+
+width: 100%;
+height: 100%;
+
+background: rgba(0, 0, 0, 0.3);
+
+
+}
+.modal-wrapper {
+
+position: relative;
+overflow: hidden;
 width: 630px;
 height: 688px;
 border-radius: 10px;
 background: #FFF;
-
 }
 #modal {
 display: flex;
@@ -348,6 +364,15 @@ line-height: normal;
 cursor: pointer;
 
 }
+#titlemodal {
+color: #000;
+text-align: center;
+font-family: "Work Sans";
+font-size: 26px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
 .line1 {
 width: 240px;
 height: 1px;
@@ -358,9 +383,7 @@ width: 237px;
 height: 36px;
 border-radius: 60px;
 background: #1D6154;
-
 color: #FFF;
-text-align: center;
 font-family: Syne;
 font-size: 14px;
 font-style: normal;
@@ -368,5 +391,59 @@ font-weight: 700;
 line-height: normal;
 cursor: pointer;
 border: none;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.item img {
+width: 100%;       
+    height: 100%;      
+    object-fit: cover; 
+    
+    display: block;
+}
+.item p, .item span, .item-title {
+    display: none;  
 }
 
+.modal .gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    width: 100%;
+}
+.close {
+    position: absolute; 
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #000;
+  
+}
+
+.zone-galerie, .zone-formulaire {
+ width: 100%;
+}
+
+.back {
+ cursor: pointer;
+ font-size: 20px;
+ margin-bottom: 20px;
+ display: inline-block;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.item {
+    width: 78px;  
+    height: 139px; 
+    overflow: hidden; 
+    position: relative;
+}
+.box {
+    box-sizing: border-box;
+}

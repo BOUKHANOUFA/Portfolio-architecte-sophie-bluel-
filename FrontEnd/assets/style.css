@@ -428,6 +428,8 @@ width: 100%;
 
 .back {
  cursor: pointer;
+ width: 21px;
+height: 21px;
  font-size: 20px;
  margin-bottom: 20px;
  display: inline-block;
@@ -446,4 +448,44 @@ width: 100%;
 }
 .box {
     box-sizing: border-box;
+}
+.modal-input {
+  width: 240px;
+  height: 51px;
+  border: none;
+  box-shadow: 0px 4px 14px 0 rgba(0,0,0,0.09);
+}
+.modal-label {
+  text-align: left;
+  font-family: Work Sans;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.btn2-modal {
+  background: #A7A7A7;
+  color: #FFF;
+  border: none;
+  border-radius: 60px;
+  height: 36px;
+  margin: 20px auto; 
+  display: block;
+  width: 237px;
+  margin-bottom: 0;
+  cursor: pointer;
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  font-family: Syne;
+  
+
+}
+.modal-form {
+display: flex;
+flex-direction: column; 
+ gap: 15px; 
+align-items: flex-start; 
 }

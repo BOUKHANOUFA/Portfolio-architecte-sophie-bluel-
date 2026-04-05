@@ -310,3 +310,63 @@ nav ul {
   margin-top: 10px;
   text-align: center;
 }
+.projets-edit {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 20px;
+
+}
+
+.group {
+width: 15.58px;
+height: 15.58px;
+
+}
+.modal {
+position: fixed;
+top: 0;
+left: 0;
+border-radius: 10px;
+width: 630px;
+height: 688px;
+border-radius: 10px;
+background: #FFF;
+
+}
+#modal {
+display: flex;
+align-items: center;
+background: none;
+color: #000;
+text-align: center;
+font-family: "Work Sans";
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+cursor: pointer;
+
+}
+.line1 {
+width: 240px;
+height: 1px;
+background-color: #B3B3B3;
+}
+.btn1-modal {
+width: 237px;
+height: 36px;
+border-radius: 60px;
+background: #1D6154;
+
+color: #FFF;
+text-align: center;
+font-family: Syne;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+cursor: pointer;
+border: none;
+}
+

@@ -8,6 +8,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
@@ -24,7 +25,6 @@
 </header>
 <main>
 	
-	
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
@@ -37,7 +37,19 @@
 		</article>
 	</section>
 	<section id="portfolio">
+		<div class="projets-edit">
 		<h2>Mes Projets</h2>
+		
+		<i class=" group fa-regular fa-pen-to-square"></i>
+		<a href="#modal1">modifier</a>
+		</div>
+		<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal">
+			<div class="modal-wraper">
+				<h3 id="titlemodal">Galerie photo</h3>
+				<div class="line1"></div>
+				<button class="btn1-modal">Ajouter une photo</button>
+			</div>
+		</aside>
 		<div class="filters"></div>
 		<div class="gallery"></div>
 	</section>

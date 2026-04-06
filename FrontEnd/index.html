@@ -60,7 +60,16 @@
 			 
         <div class="zone-formulaire" style="display: none;">
              <span class="back"><i class="fa-solid fa-arrow-left"></i></span>
-            <h3>Ajouter photo</h3>
+            <h3 class="h3">Ajouter photo</h3>
+			<label class="upload-box">
+  <input type="file" id="fileInput" hidden>
+  
+  <div class="upload-content">
+     <i class=" fa-solid fa-image fa-3x upload-icon"></i>
+    <button class="upload-button">+ Ajouter photo</button>
+    <span>jpg, png : 4mo max</span>
+  </div>
+</label>
            <form id="form-ajout" class="modal-form">
     <label class="modal-label" for="titre">Titre</label>
     <input class="modal-input" type="text" name="titre" placeholder="">

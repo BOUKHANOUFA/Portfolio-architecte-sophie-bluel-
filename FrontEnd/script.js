@@ -81,14 +81,22 @@ function setupFilters() {
 }
 
 
-const modal = document.getElementById('modal1');
-const btnModifier = document.querySelector('a[href="#modal1"]');
+const modal = document.getElementById('modal');
+const btnModifier = document.querySelector('a[href="#modal"]');
 const closeBtn = modal.querySelector('.close');
 const zoneGalerie = modal.querySelector('.zone-galerie');
 const zoneFormulaire = modal.querySelector('.zone-formulaire');
 const btnAddPhoto = modal.querySelector('#btn-photo');
 const backBtn = modal.querySelector('.back');
 
+function openModal(e) {
+    e.preventDefault();
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    zoneGalerie.style.display = 'block';
+    zoneFormulaire.style.display = 'none';
+}
 
 function closeModal() {
     modal.style.display = 'none';
@@ -98,36 +106,27 @@ function closeModal() {
     zoneGalerie.style.display = 'block';
 }
 
+// Ouvrir
+btnModifier.addEventListener('click', openModal);
 
-btnModifier.addEventListener('click', (e) => {
-    e.preventDefault();
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-
-    zoneGalerie.style.display = 'block';
-    zoneFormulaire.style.display = 'none';
-});
-
-
+// Fermer avec X
 closeBtn.addEventListener('click', closeModal);
 
-
-window.addEventListener('click', (e) => {
+// Fermer en cliquant en dehors
+modal.addEventListener('click', (e) => {
     if (e.target === modal) {
         closeModal();
     }
 });
 
-
+// Aller vers formulaire
 btnAddPhoto.addEventListener('click', () => {
     zoneGalerie.style.display = 'none';
     zoneFormulaire.style.display = 'block';
 });
 
-
-if (backBtn) {
-    backBtn.addEventListener('click', () => {
-        zoneFormulaire.style.display = 'none';
-        zoneGalerie.style.display = 'block';
-    });
-}
+// Retour galerie
+backBtn.addEventListener('click', () => {
+    zoneFormulaire.style.display = 'none';
+    zoneGalerie.style.display = 'block';
+});

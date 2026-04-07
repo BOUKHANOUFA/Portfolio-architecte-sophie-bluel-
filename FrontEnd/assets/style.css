@@ -325,10 +325,8 @@ height: 15.58px;
 
 }
 .modal {
-
-
 position: fixed;
-display: flex;
+display: none;
 align-items: center;
 justify-content: center;
 top: 0;
@@ -351,9 +349,9 @@ border-radius: 10px;
 background: #FFF;
 }
 #modal {
-display: flex;
+
 align-items: center;
-background: none;
+
 color: #000;
 text-align: center;
 font-family: "Work Sans";
@@ -416,9 +414,10 @@ width: 100%;
     position: absolute; 
     top: 20px;
     right: 20px;
-    font-size: 24px;
+    font-size: 21px;
     cursor: pointer;
     color: #000;
+ 
   
 }
 
@@ -428,9 +427,8 @@ width: 100%;
 
 .back {
  cursor: pointer;
- width: 21px;
-height: 21px;
- font-size: 20px;
+top: 20px ;
+ font-size: 21px;
  margin-bottom: 20px;
  display: inline-block;
 }
@@ -549,4 +547,16 @@ margin-bottom: 36px;
   align-items: center;     
   justify-content: center; 
   gap: 7px;               
+}
+.btn-modifier {
+  text-decoration: none;
+  
+  cursor: pointer;
+  color: #000;
+text-align: center;
+font-family: "Work Sans";
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 }

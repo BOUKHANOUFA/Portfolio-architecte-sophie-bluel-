@@ -40,9 +40,9 @@
 		<div class="projets-edit">
 		<h2>Mes Projets</h2>
 		<i class=" group fa-regular fa-pen-to-square"></i>
-		<a href="#modal1">modifier</a>
+		<a href="#modal" id="openModal" class="btn-modifier">modifier</a>
 		</div>
-		<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal">
+		<aside id="modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal">
 			<div class="modal-wrapper">
 				<span class="close">x</span>
 				<div class="zone-galerie">
@@ -59,7 +59,8 @@
 			</div>
 			 
         <div class="zone-formulaire" style="display: none;">
-             <span class="back"><i class="fa-solid fa-arrow-left"></i></span>
+             <span class="back">
+				<i class="fa-solid fa-arrow-left "></i></span>
             <h3 class="h3">Ajouter photo</h3>
 			<label class="upload-box">
   <input type="file" id="fileInput" hidden>

@@ -5,6 +5,8 @@ fetch ("http://localhost:5678/api/works")
   .then(data => {
       allWorks = data;      
     afficherTravaux(allWorks);
+    afficherTravauxModal(allWorks); 
+    
   });
   
   function afficherTravaux(works) {
@@ -93,6 +95,9 @@ function openModal(e) {
     e.preventDefault();
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+
+    modal.setAttribute('aria-hidden', 'false'); // open
+    modal.setAttribute('aria-hidden', 'true');  // close
 
     zoneGalerie.style.display = 'block';
     zoneFormulaire.style.display = 'none';

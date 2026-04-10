@@ -1,45 +1,62 @@
 let allWorks = [];
-fetch ("http://localhost:5678/api/works")
 
-  .then (response => response.json())
+fetch("http://localhost:5678/api/works")
+  .then(response => response.json())
   .then(data => {
-      allWorks = data;      
+    allWorks = data;
+
     afficherTravaux(allWorks);
-    afficherTravauxModal(allWorks); 
-    
+    afficherTravauxModal(allWorks);
   });
-  
-  function afficherTravaux(works) {
+
+function afficherTravaux(works) {
   const gallery = document.querySelector(".gallery");
   gallery.innerHTML = "";
 
   works.forEach(work => {
-   
     const figure = document.createElement("figure");
     const img = document.createElement("img");
     const figcaption = document.createElement("figcaption");
 
-   
     img.src = work.imageUrl;
     img.alt = work.title;
     figcaption.textContent = work.title;
 
-  
     figure.appendChild(img);
     figure.appendChild(figcaption);
 
-   
     gallery.appendChild(figure);
   });
 }
+
+function afficherTravauxModal(works) {
+  const gallery = document.querySelector(".modal-gallery");
+  gallery.innerHTML = "";
+
+  works.forEach(work => {
+    const figure = document.createElement("figure");
+    figure.classList.add("item-modal");
+
+    const img = document.createElement("img");
+    img.src = work.imageUrl;
+
+    const btnDelete = document.createElement("button");
+    btnDelete.classList.add("delete-btn");
+    btnDelete.innerHTML = "🗑";
+
+    figure.appendChild(img);
+    figure.appendChild(btnDelete);
+    gallery.appendChild(figure);
+  });
+}
+
 fetch("http://localhost:5678/api/categories")
-.then(response => response.json())
+  .then(response => response.json())
   .then(data => {
-    console.log(data); 
     afficherCategories(data);
   });
 
-  function afficherCategories(categories) {
+function afficherCategories(categories) {
   const filters = document.querySelector(".filters");
   filters.innerHTML = "";
 
@@ -65,73 +82,65 @@ function setupFilters() {
 
   buttons.forEach(button => {
     button.addEventListener("click", () => {
-      // Changer le style actif
       document.querySelector(".active")?.classList.remove("active");
       button.classList.add("active");
 
       const categoryId = button.dataset.id;
 
       if (categoryId === "all") {
-        afficherTravaux(allWorks); 
+        afficherTravaux(allWorks);
       } else {
-        
-        const filteredWorks = allWorks.filter(work => work.categoryId == categoryId);
+        const filteredWorks = allWorks.filter(
+          work => work.categoryId == categoryId
+        );
         afficherTravaux(filteredWorks);
       }
     });
   });
 }
 
-
-const modal = document.getElementById('modal');
+const modal = document.getElementById("modal");
 const btnModifier = document.querySelector('a[href="#modal"]');
-const closeBtn = modal.querySelector('.close');
-const zoneGalerie = modal.querySelector('.zone-galerie');
-const zoneFormulaire = modal.querySelector('.zone-formulaire');
-const btnAddPhoto = modal.querySelector('#btn-photo');
-const backBtn = modal.querySelector('.back');
+const closeBtn = modal.querySelector(".close");
+const zoneGalerie = modal.querySelector(".zone-galerie");
+const zoneFormulaire = modal.querySelector(".zone-formulaire");
+const btnAddPhoto = modal.querySelector("#btn-photo");
+const backBtn = modal.querySelector(".back");
 
 function openModal(e) {
-    e.preventDefault();
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+  e.preventDefault();
+  modal.style.display = "flex";
+  document.body.style.overflow = "hidden";
 
-    modal.setAttribute('aria-hidden', 'false'); // open
-    modal.setAttribute('aria-hidden', 'true');  // close
+  modal.setAttribute("aria-hidden", "false");
 
-    zoneGalerie.style.display = 'block';
-    zoneFormulaire.style.display = 'none';
+  zoneGalerie.style.display = "block";
+  zoneFormulaire.style.display = "none";
 }
 
 function closeModal() {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
+  modal.style.display = "none";
+  document.body.style.overflow = "auto";
 
-    zoneFormulaire.style.display = 'none';
-    zoneGalerie.style.display = 'block';
+  zoneFormulaire.style.display = "none";
+  zoneGalerie.style.display = "block";
 }
 
-// Ouvrir
-btnModifier.addEventListener('click', openModal);
+btnModifier.addEventListener("click", openModal);
+closeBtn.addEventListener("click", closeModal);
 
-// Fermer avec X
-closeBtn.addEventListener('click', closeModal);
-
-// Fermer en cliquant en dehors
-modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        closeModal();
-    }
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    closeModal();
+  }
 });
 
-// Aller vers formulaire
-btnAddPhoto.addEventListener('click', () => {
-    zoneGalerie.style.display = 'none';
-    zoneFormulaire.style.display = 'block';
+btnAddPhoto.addEventListener("click", () => {
+  zoneGalerie.style.display = "none";
+  zoneFormulaire.style.display = "block";
 });
 
-// Retour galerie
-backBtn.addEventListener('click', () => {
-    zoneFormulaire.style.display = 'none';
-    zoneGalerie.style.display = 'block';
+backBtn.addEventListener("click", () => {
+  zoneFormulaire.style.display = "none";
+  zoneGalerie.style.display = "block";
 });

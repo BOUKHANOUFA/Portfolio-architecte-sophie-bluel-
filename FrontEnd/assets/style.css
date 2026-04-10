@@ -59,7 +59,7 @@ header {
 	margin: 50px 0
 }
 section {
-	margin: 50px 0
+	margin: 80px 0
 }
 
 h1{
@@ -141,7 +141,7 @@ li:hover {
 	display: flex;
 	justify-content: center;
 	gap: 10px;
-	margin-bottom: 40px;
+	margin: 50px;
 }
 .filter-btn {
 	height: 37px;
@@ -373,7 +373,7 @@ line-height: normal;
 
 }
 .line1 {
-width: 240px;
+width: 420px;
 height: 1px;
 background-color: #B3B3B3;
 
@@ -431,21 +431,24 @@ width: 100%;
 
 .zone-galerie, .zone-formulaire {
  width: 100%;
- padding: 70px; 
+  
   box-sizing: border-box;
   
 }
 
 .back {
  cursor: pointer;
-top: 20px ;
+position:absolute;
+top: 20px;
+left: 20px;
  font-size: 21px;
  margin-bottom: 20px;
  display: inline-block;
 }
 .gallery {
+  width: 100%;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
 }
 
@@ -477,10 +480,10 @@ top: 20px ;
   border: none;
   border-radius: 60px;
   height: 36px;
-  margin: 20px auto; 
+  margin: 20px auto 60px auto;
   display: block;
   width: 237px;
-  margin-bottom: 0;
+  
   cursor: pointer;
   color: #FFF;
   text-align: center;
@@ -499,11 +502,12 @@ flex-direction: column;
 
   max-width: 420px;
   margin: auto;
+  
 }
 .upload-box {
   
   width: 420px;
-  height: 169px;
+  
   display: block;
   background:  #E8F1F6;
   padding: 30px;
@@ -551,6 +555,7 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 margin-bottom: 36px;
+margin-top: 40px;
 }
 .upload-content {
   display: flex;           
@@ -561,7 +566,7 @@ margin-bottom: 36px;
 }
 .btn-modifier {
 text-decoration: none;
-cursor: pointer;
+  cursor: pointer;
 color: #000;
 text-align: center;
 font-family: "Work Sans";
@@ -569,4 +574,66 @@ font-size: 14px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+}
+.modal-gallery {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.modal-gallery img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  display: block;
+}
+
+.modal-gallery figure {
+  position: relative;
+}
+.modal-gallery {
+  padding: 0 70px;
+}
+.gallery {
+  padding: 0 60px;
+}
+
+.projets-edit {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 12px;
+}
+.group,
+.btn-modifier {
+  display: flex;
+  align-items: center;
+}
+.group {
+  margin-top: 2px;
+}
+.projets-edit h2 {
+  margin: 0;
+  margin-right: 20px;
+}
+.delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+  width: 20px;
+  height: 20px;
+
+  border: none;
+  background: black;
+  color: white;
+
+  font-size: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
 }

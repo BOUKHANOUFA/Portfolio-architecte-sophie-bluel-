@@ -166,4 +166,51 @@ backBtn.addEventListener("click", () => {
   zoneGalerie.style.display = "block";
 });
 
-refreshUI();
+
+
+function refreshUI() {
+  afficherTravaux(allWorks);
+  afficherTravauxModal(allWorks);
+}
+
+const form = document.getElementById("form-ajout");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const file = document.getElementById("fileInput").files[0];
+  const title = document.querySelector('[name="titre"]').value;
+  const category = document.querySelector('[name="categorie"]').value;
+  const token = localStorage.getItem("token");
+
+  if (!file || !title || !category) {
+    alert("Formulaire incomplet");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("image", file);
+  formData.append("title", title);
+  formData.append("category", Number(category));
+
+  fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    body: formData
+  })
+  .then(() => {
+    return fetch("http://localhost:5678/api/works");
+  })
+  .then(res => res.json())
+  .then(data => {
+    allWorks = data;
+    refreshUI();
+    closeModal();
+  });
+
+  form.reset();
+  document.querySelector(".preview-img")?.remove();
+});
+

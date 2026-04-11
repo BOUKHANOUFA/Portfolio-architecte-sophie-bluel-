@@ -371,6 +371,7 @@ font-size: 26px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+margin-top: 50px;
 
 }
 .line1 {
@@ -378,8 +379,15 @@ width: 420px;
 height: 1px;
 background-color: #B3B3B3;
 
-  margin: 30px auto; 
+  margin: 0 auto; 
 }
+.line2 {
+  width: 420px;
+  height: 1px;
+  background-color: #B3B3B3;
+  margin: 30px auto;
+}
+
 .btn1-modal {
 width: 237px;
 height: 36px;
@@ -396,7 +404,7 @@ border: none;
 display: flex;
 align-items: center;
 justify-content: center;
-  margin: 0 auto;
+  margin: 30px auto;
 }
 .item img {
 width: 100%;       
@@ -484,6 +492,7 @@ left: 20px;
   margin: 20px auto 60px auto;
   display: block;
   width: 237px;
+  margin: auto;
   
   cursor: pointer;
   color: #FFF;
@@ -588,13 +597,14 @@ line-height: normal;
   height: 100px;
   object-fit: cover;
   display: block;
+  margin-bottom: 10px;
 }
 
 .modal-gallery figure {
   position: relative;
 }
 .modal-gallery {
-  padding: 0 70px;
+  padding: 80px 80px 50px 80px;
 }
 .gallery {
   padding: 0 60px;
@@ -623,13 +633,14 @@ line-height: normal;
   top: 5px;
   right: 5px;
 
-  width: 20px;
+  
   height: 20px;
 
   border: none;
   background: black;
-  color: white;
+  color: #ffffff;
 
+fill: #FFF;
   font-size: 12px;
 
   display: flex;

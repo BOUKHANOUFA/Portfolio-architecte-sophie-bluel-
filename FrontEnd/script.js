@@ -44,6 +44,27 @@ function afficherTravauxModal(works) {
     btnDelete.classList.add("delete-btn");
     btnDelete.innerHTML = "🗑";
 
+    btnDelete.addEventListener("click", () => {
+  const token = localStorage.getItem("token");
+
+  fetch(`http://localhost:5678/api/works/${work.id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+
+    
+      allWorks = allWorks.filter(w => w.id !== work.id);
+
+     
+      refreshUI();
+    }
+  });
+});
+
     figure.appendChild(img);
     figure.appendChild(btnDelete);
     gallery.appendChild(figure);
@@ -144,3 +165,5 @@ backBtn.addEventListener("click", () => {
   zoneFormulaire.style.display = "none";
   zoneGalerie.style.display = "block";
 });
+
+refreshUI();

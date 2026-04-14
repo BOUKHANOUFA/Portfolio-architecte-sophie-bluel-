@@ -1,25 +1,51 @@
+document.addEventListener("DOMContentLoaded", () => {
+
 let allWorks = [];
 
+/* =======================
+   TOKEN + MODE EDITION
+======================= */
+const token = localStorage.getItem("token");
+
+const filters = document.querySelector(".filters");
+const modifierBtn = document.querySelector(".btn-modifier");
+const editMode = document.getElementById("edit-mode");
+
+if (token) {
+  if (filters) filters.style.display = "none";
+  if (editMode) editMode.classList.remove("hidden");
+} else {
+  if (modifierBtn) modifierBtn.style.display = "none";
+}
+
+/* =======================
+   RECUP WORKS
+======================= */
 fetch("http://localhost:5678/api/works")
-  .then(response => response.json())
+  .then(res => res.json())
   .then(data => {
     allWorks = data;
-
     afficherTravaux(allWorks);
     afficherTravauxModal(allWorks);
   });
 
+/* =======================
+   AFFICHAGE GALERIE
+======================= */
 function afficherTravaux(works) {
   const gallery = document.querySelector(".gallery");
+  if (!gallery) return;
+
   gallery.innerHTML = "";
 
   works.forEach(work => {
     const figure = document.createElement("figure");
-    const img = document.createElement("img");
-    const figcaption = document.createElement("figcaption");
 
+    const img = document.createElement("img");
     img.src = work.imageUrl;
     img.alt = work.title;
+
+    const figcaption = document.createElement("figcaption");
     figcaption.textContent = work.title;
 
     figure.appendChild(img);
@@ -29,41 +55,40 @@ function afficherTravaux(works) {
   });
 }
 
+/* =======================
+   MODALE GALERIE
+======================= */
 function afficherTravauxModal(works) {
   const gallery = document.querySelector(".modal-gallery");
+  if (!gallery) return;
+
   gallery.innerHTML = "";
 
   works.forEach(work => {
     const figure = document.createElement("figure");
-    figure.classList.add("item-modal");
 
     const img = document.createElement("img");
     img.src = work.imageUrl;
 
     const btnDelete = document.createElement("button");
-    btnDelete.classList.add("delete-btn");
-    btnDelete.innerHTML = "🗑";
+    btnDelete.textContent = "🗑";
 
     btnDelete.addEventListener("click", () => {
-  const token = localStorage.getItem("token");
+      const token = localStorage.getItem("token");
 
-  fetch(`http://localhost:5678/api/works/${work.id}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-  .then(response => {
-    if (response.ok) {
-
-    
-      allWorks = allWorks.filter(w => w.id !== work.id);
-
-     
-      refreshUI();
-    }
-  });
-});
+      fetch(`http://localhost:5678/api/works/${work.id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(res => {
+        if (res.ok) {
+          allWorks = allWorks.filter(w => w.id !== work.id);
+          refreshUI();
+        }
+      });
+    });
 
     figure.appendChild(img);
     figure.appendChild(btnDelete);
@@ -71,14 +96,20 @@ function afficherTravauxModal(works) {
   });
 }
 
+/* =======================
+   CATEGORIES + FILTRES
+======================= */
 fetch("http://localhost:5678/api/categories")
-  .then(response => response.json())
+  .then(res => res.json())
   .then(data => {
     afficherCategories(data);
+    remplirSelect(data);
   });
 
 function afficherCategories(categories) {
   const filters = document.querySelector(".filters");
+  if (!filters) return;
+
   filters.innerHTML = "";
 
   const allButton = document.createElement("button");
@@ -87,11 +118,11 @@ function afficherCategories(categories) {
   allButton.dataset.id = "all";
   filters.appendChild(allButton);
 
-  categories.forEach(category => {
+  categories.forEach(cat => {
     const button = document.createElement("button");
-    button.textContent = category.name;
+    button.textContent = cat.name;
     button.classList.add("filter-btn");
-    button.dataset.id = category.id;
+    button.dataset.id = cat.id;
     filters.appendChild(button);
   });
 
@@ -103,6 +134,7 @@ function setupFilters() {
 
   buttons.forEach(button => {
     button.addEventListener("click", () => {
+
       document.querySelector(".active")?.classList.remove("active");
       button.classList.add("active");
 
@@ -111,25 +143,42 @@ function setupFilters() {
       if (categoryId === "all") {
         afficherTravaux(allWorks);
       } else {
-        const filteredWorks = allWorks.filter(
-          work => work.categoryId == categoryId
+        const filtered = allWorks.filter(
+          w => w.categoryId == categoryId
         );
-        afficherTravaux(filteredWorks);
+        afficherTravaux(filtered);
       }
     });
   });
 }
 
+function remplirSelect(categories) {
+  const select = document.getElementById("categorie-select");
+  if (!select) return;
+
+  categories.forEach(cat => {
+    const option = document.createElement("option");
+    option.value = cat.id;
+    option.textContent = cat.name;
+    select.appendChild(option);
+  });
+}
+
+/* =======================
+   MODALE
+======================= */
 const modal = document.getElementById("modal");
-const btnModifier = document.querySelector('a[href="#modal"]');
-const closeBtn = modal.querySelector(".close");
-const zoneGalerie = modal.querySelector(".zone-galerie");
-const zoneFormulaire = modal.querySelector(".zone-formulaire");
-const btnAddPhoto = modal.querySelector("#btn-photo");
-const backBtn = modal.querySelector(".back");
+const btnModifier = document.querySelector(".btn-modifier");
+const closeBtn = modal?.querySelector(".close");
+const zoneGalerie = modal?.querySelector(".zone-galerie");
+const zoneFormulaire = modal?.querySelector(".zone-formulaire");
+const btnAddPhoto = modal?.querySelector("#btn-photo");
+const backBtn = modal?.querySelector(".back");
 
 function openModal(e) {
   e.preventDefault();
+  if (!modal) return;
+
   modal.style.display = "flex";
   document.body.style.overflow = "hidden";
 
@@ -140,42 +189,49 @@ function openModal(e) {
 }
 
 function closeModal() {
+  if (!modal) return;
+
   modal.style.display = "none";
   document.body.style.overflow = "auto";
 
-  zoneFormulaire.style.display = "none";
   zoneGalerie.style.display = "block";
+  zoneFormulaire.style.display = "none";
+
+  form.reset();
+  document.querySelector(".preview-img")?.remove();
 }
 
-btnModifier.addEventListener("click", openModal);
-closeBtn.addEventListener("click", closeModal);
+btnModifier?.addEventListener("click", openModal);
+closeBtn?.addEventListener("click", closeModal);
 
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    closeModal();
-  }
+modal?.addEventListener("click", (e) => {
+  if (e.target === modal) closeModal();
 });
 
-btnAddPhoto.addEventListener("click", () => {
+btnAddPhoto?.addEventListener("click", () => {
   zoneGalerie.style.display = "none";
   zoneFormulaire.style.display = "block";
 });
 
-backBtn.addEventListener("click", () => {
+backBtn?.addEventListener("click", () => {
   zoneFormulaire.style.display = "none";
   zoneGalerie.style.display = "block";
 });
 
-
-
+/* =======================
+   REFRESH UI
+======================= */
 function refreshUI() {
   afficherTravaux(allWorks);
   afficherTravauxModal(allWorks);
 }
 
+/* =======================
+   FORM AJOUT WORK
+======================= */
 const form = document.getElementById("form-ajout");
 
-form.addEventListener("submit", (e) => {
+form?.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const file = document.getElementById("fileInput").files[0];
@@ -183,8 +239,14 @@ form.addEventListener("submit", (e) => {
   const category = document.querySelector('[name="categorie"]').value;
   const token = localStorage.getItem("token");
 
+  document.querySelector(".error-msg")?.remove();
+
   if (!file || !title || !category) {
-    alert("Formulaire incomplet");
+    const error = document.createElement("p");
+    error.classList.add("error-msg");
+    error.textContent = "Veuillez remplir tous les champs";
+    error.style.color = "red";
+    form.appendChild(error);
     return;
   }
 
@@ -200,9 +262,7 @@ form.addEventListener("submit", (e) => {
     },
     body: formData
   })
-  .then(() => {
-    return fetch("http://localhost:5678/api/works");
-  })
+  .then(() => fetch("http://localhost:5678/api/works"))
   .then(res => res.json())
   .then(data => {
     allWorks = data;
@@ -214,3 +274,28 @@ form.addEventListener("submit", (e) => {
   document.querySelector(".preview-img")?.remove();
 });
 
+/* =======================
+   PREVIEW IMAGE
+======================= */
+const fileInput = document.getElementById("fileInput");
+
+fileInput?.addEventListener("change", () => {
+  const file = fileInput.files[0];
+
+  if (file) {
+    const preview = document.createElement("img");
+    preview.classList.add("preview-img");
+    preview.src = URL.createObjectURL(file);
+
+    const box = document.querySelector(".upload-content");
+    if (!box) return;
+
+    const old = document.querySelector(".preview-img");
+    if (old) old.remove();
+
+    box.innerHTML = "";
+    box.appendChild(preview);
+  }
+});
+
+});

@@ -12,6 +12,11 @@
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
+
+<div id="edit-mode" class="edit-mode hidden">
+  <i class="fa-regular fa-pen-to-square"></i>
+  <span>Mode édition</span>
+</div>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
@@ -72,13 +77,17 @@
   </div>
 </label>
            <form id="form-ajout" class="modal-form">
-    <label class="modal-label" for="titre">Titre</label>
-    <input class="modal-input" type="text" name="titre" placeholder="">
 
-    <label class="modal-label" for="categorie">Catégorie</label>
-    <input class="modal-input" type="url" name="categorie" placeholder="">
-<div class="line2"></div>
-    <button type="submit" class="btn2-modal">Valider</button>
+  <label class="modal-label" for="titre">Titre</label>
+  <input class="modal-input" type="text" name="titre">
+
+  <label class="modal-label" for="categorie">Catégorie</label>
+  <select class="modal-input" name="categorie" id="categorie-select"></select>
+
+  <div class="line2"></div>
+
+  <button type="submit" class="btn2-modal">Valider</button>
+
 </form>
         </div>
 

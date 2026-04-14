@@ -33,10 +33,25 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
+
+
 const token = localStorage.getItem("token");
 
 if (token) {
   console.log("Utilisateur connecté");
 } else {
   console.log("Utilisateur non connecté");
+}
+
+
+if (token) {
+  const loginLink = document.querySelector('a[href="login.html"]');
+
+  loginLink.textContent = "logout";
+
+  loginLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    window.location.reload();
+  });
 }

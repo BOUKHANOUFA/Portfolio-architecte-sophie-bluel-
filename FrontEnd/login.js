@@ -16,7 +16,10 @@ form.addEventListener("submit", async (e) => {
       body: JSON.stringify({ email, password }),
     });
 
-    const data = await response.json();
+    let data = {};
+try {
+  data = await response.json();
+} catch {}
 
     if (response.ok && data.token) {
       // Connexion réussie
@@ -44,14 +47,3 @@ if (token) {
 }
 
 
-if (token) {
-  const loginLink = document.querySelector('a[href="login.html"]');
-
-  loginLink.textContent = "logout";
-
-  loginLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    localStorage.removeItem("token");
-    window.location.reload();
-  });
-}

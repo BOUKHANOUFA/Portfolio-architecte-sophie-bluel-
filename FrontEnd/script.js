@@ -18,6 +18,18 @@ if (token) {
   if (modifierBtn) modifierBtn.style.display = "none";
 }
 
+const loginLink = document.querySelector('a[href="login.html"]');
+
+if (token && loginLink) {
+  loginLink.textContent = "logout";
+
+  loginLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    window.location.reload();
+  });
+}
+
 /* =======================
    RECUP WORKS
 ======================= */
@@ -71,7 +83,12 @@ function afficherTravauxModal(works) {
     img.src = work.imageUrl;
 
     const btnDelete = document.createElement("button");
-    btnDelete.textContent = "🗑";
+btnDelete.classList.add("delete-btn");
+
+const icon = document.createElement("i");
+icon.classList.add("fa-solid", "fa-trash-can");
+
+btnDelete.appendChild(icon);
 
     btnDelete.addEventListener("click", () => {
       const token = localStorage.getItem("token");
@@ -100,7 +117,10 @@ function afficherTravauxModal(works) {
    CATEGORIES + FILTRES
 ======================= */
 fetch("http://localhost:5678/api/categories")
-  .then(res => res.json())
+  .then(res => {
+  if (!res.ok) throw new Error("Erreur API");
+  return res.json();
+})
   .then(data => {
     afficherCategories(data);
     remplirSelect(data);
@@ -270,7 +290,7 @@ form?.addEventListener("submit", (e) => {
     closeModal();
   });
 
-  form.reset();
+  if (form) form.reset();
   document.querySelector(".preview-img")?.remove();
 });
 
@@ -293,8 +313,11 @@ fileInput?.addEventListener("change", () => {
     const old = document.querySelector(".preview-img");
     if (old) old.remove();
 
-    box.innerHTML = "";
-    box.appendChild(preview);
+   const oldPreview = document.querySelector(".preview-img");
+if (oldPreview) oldPreview.remove();
+
+preview.classList.add("preview-img");
+box.appendChild(preview);
   }
 });
 

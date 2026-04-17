@@ -514,18 +514,6 @@ flex-direction: column;
   margin: auto;
   
 }
-.upload-box {
-  
-  width: 420px;
-  
-  display: block;
-  background:  #E8F1F6;
-  padding: 30px;
-  border-radius: 3px;
-  text-align: center;
-  cursor: pointer;
-  margin: auto;
-}
 
 .upload-icon {
 font-size: 76px;
@@ -675,4 +663,24 @@ fill: #FFF;
 
 .hidden {
   display: none;
+}
+.preview-img {
+  width: 129px; ;
+  height: 193px;
+  object-fit: cover;
+   
+  inset: 0;
+}
+
+.upload-box {
+  
+  width: 420px;
+  min-height: 169px;
+  display: block;
+  background:  #E8F1F6;
+  
+  border-radius: 3px;
+  text-align: center;
+  cursor: pointer;
+  margin: auto;
 }

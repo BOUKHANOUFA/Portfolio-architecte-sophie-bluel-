@@ -9,6 +9,7 @@ const token = localStorage.getItem("token");
 
 const filters = document.querySelector(".filters");
 const modifierBtn = document.querySelector(".btn-modifier");
+const iconModifier = document.querySelector(".group");
 const editMode = document.getElementById("edit-mode");
 
 if (token) {
@@ -16,6 +17,7 @@ if (token) {
   if (editMode) editMode.classList.remove("hidden");
 } else {
   if (modifierBtn) modifierBtn.style.display = "none";
+  if (iconModifier) iconModifier.style.display = "none";
 }
 
 const loginLink = document.querySelector('a[href="login.html"]');
@@ -214,9 +216,6 @@ function closeModal() {
   modal.style.display = "none";
   document.body.style.overflow = "auto";
 
-  zoneGalerie.style.display = "block";
-  zoneFormulaire.style.display = "none";
-
   form.reset();
   document.querySelector(".preview-img")?.remove();
 }
@@ -312,11 +311,7 @@ fileInput?.addEventListener("change", () => {
 
     const old = document.querySelector(".preview-img");
     if (old) old.remove();
-
-   const oldPreview = document.querySelector(".preview-img");
-if (oldPreview) oldPreview.remove();
-
-preview.classList.add("preview-img");
+box.innerHTML = "";
 box.appendChild(preview);
   }
 });

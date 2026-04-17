@@ -38,12 +38,6 @@ try {
 
 
 
-const token = localStorage.getItem("token");
 
-if (token) {
-  console.log("Utilisateur connecté");
-} else {
-  console.log("Utilisateur non connecté");
-}
 
 

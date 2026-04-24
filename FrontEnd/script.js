@@ -117,10 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
    CATEGORIES + FILTRES
 ======================= */
   fetch("http://localhost:5678/api/categories")
-    .then((res) => {
-      if (!res.ok) throw new Error("Erreur API");
-      return res.json();
-    })
+    .then((res) => res.json())
     .then((data) => {
       afficherCategories(data);
       remplirSelect(data);
@@ -199,8 +196,6 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.style.display = "flex";
     document.body.style.overflow = "hidden";
 
-    modal.setAttribute("aria-hidden", "false");
-
     zoneGalerie.style.display = "block";
     zoneFormulaire.style.display = "none";
   }
@@ -213,6 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.reset();
     document.querySelector(".preview-img")?.remove();
+    resetUploadBox();
   }
 
   btnModifier?.addEventListener("click", openModal);
@@ -241,6 +237,52 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =======================
+   PREVIEW IMAGE
+======================= */
+  const fileInput = document.getElementById("fileInput");
+
+  fileInput?.addEventListener("change", () => {
+    const file = fileInput.files[0];
+
+    if (file) {
+      const preview = document.createElement("img");
+      preview.classList.add("preview-img");
+      preview.src = URL.createObjectURL(file);
+
+      const box = document.querySelector(".upload-content");
+      if (!box) return;
+
+      box.innerHTML = "";
+      box.appendChild(preview);
+    }
+  });
+
+  /* =======================
+   RESET UPLOAD BOX
+======================= */
+  function resetUploadBox() {
+    const box = document.querySelector(".upload-content");
+    if (!box) return;
+
+    box.innerHTML = "";
+
+    const icon = document.createElement("i");
+    icon.className = "fa-solid fa-image fa-3x upload-icon";
+
+    const label = document.createElement("label");
+    label.setAttribute("for", "fileInput");
+    label.className = "upload-button";
+    label.textContent = "+ Ajouter photo";
+
+    const span = document.createElement("span");
+    span.textContent = "jpg, png : 4mo max";
+
+    box.appendChild(icon);
+    box.appendChild(label);
+    box.appendChild(span);
+  }
+
+  /* =======================
    FORM AJOUT WORK
 ======================= */
   const form = document.getElementById("form-ajout");
@@ -251,18 +293,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const file = document.getElementById("fileInput").files[0];
     const title = document.querySelector('[name="titre"]').value;
     const category = document.querySelector('[name="categorie"]').value;
-    const token = localStorage.getItem("token");
 
-    document.querySelector(".error-msg")?.remove();
-
-    if (!file || !title || !category) {
-      const error = document.createElement("p");
-      error.classList.add("error-msg");
-      error.textContent = "Veuillez remplir tous les champs";
-      error.style.color = "red";
-      form.appendChild(error);
-      return;
-    }
+    if (!file || !title || !category) return;
 
     const formData = new FormData();
     formData.append("image", file);
@@ -282,32 +314,12 @@ document.addEventListener("DOMContentLoaded", () => {
         allWorks = data;
         refreshUI();
         closeModal();
+
+        document.getElementById("fileInput").value = "";
+        document.querySelector('[name="titre"]').value = "";
+        document.querySelector('[name="categorie"]').value = "";
+
+        resetUploadBox();
       });
-
-    if (form) form.reset();
-    document.querySelector(".preview-img")?.remove();
-  });
-
-  /* =======================
-   PREVIEW IMAGE
-======================= */
-  const fileInput = document.getElementById("fileInput");
-
-  fileInput?.addEventListener("change", () => {
-    const file = fileInput.files[0];
-
-    if (file) {
-      const preview = document.createElement("img");
-      preview.classList.add("preview-img");
-      preview.src = URL.createObjectURL(file);
-
-      const box = document.querySelector(".upload-content");
-      if (!box) return;
-
-      const old = document.querySelector(".preview-img");
-      if (old) old.remove();
-      box.innerHTML = "";
-      box.appendChild(preview);
-    }
   });
 });

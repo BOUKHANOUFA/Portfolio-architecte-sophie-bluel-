@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
@@ -63,7 +63,7 @@
           <i class="group fa-regular fa-pen-to-square"></i>
           <a href="#modal" id="openModal" class="btn-modifier">modifier</a>
         </div>
-        <aside
+        <div
           id="modal"
           class="modal"
           aria-hidden="true"
@@ -85,21 +85,22 @@
 
             <div class="zone-formulaire" style="display: none">
               <span class="back"> <i class="fa-solid fa-arrow-left"></i></span>
+               <form id="form-ajout" class="modal-form">
               <h3 class="h3">Ajouter photo</h3>
-              <label class="upload-box">
+              <div class="upload-box">
                 <input type="file" id="fileInput" hidden />
 
                 <div class="upload-content">
                   <i class="fa-solid fa-image fa-3x upload-icon"></i>
-                  <button class="upload-button">+ Ajouter photo</button>
+                  <label for="fileInput" class="upload-button">+ Ajouter photo</label>
                   <span>jpg, png : 4mo max</span>
                 </div>
-              </label>
-              <form id="form-ajout" class="modal-form">
+              </div>
+             
                 <label class="modal-label" for="titre">Titre</label>
-                <input class="modal-input" type="text" name="titre" />
+                <input id="titre" class="modal-input" type="text" name="titre" />
 
-                <label class="modal-label" for="categorie">Catégorie</label>
+                <label class="modal-label" for="categorie-select">Catégorie</label>
                 <select
                   class="modal-input"
                   name="categorie"
@@ -112,7 +113,7 @@
               </form>
             </div>
           </div>
-        </aside>
+        </div>
         <div class="filters"></div>
         <div class="gallery"></div>
       </section>

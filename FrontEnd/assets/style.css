@@ -315,7 +315,7 @@ nav li a {
   font-family: "Work Sans";
   font-size: 16px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   line-height: normal;
 }
 
@@ -743,4 +743,8 @@ nav ul {
   text-align: center;
   cursor: pointer;
   margin: auto;
+}
+.upload-content,
+.upload-content * {
+  cursor: pointer;
 }

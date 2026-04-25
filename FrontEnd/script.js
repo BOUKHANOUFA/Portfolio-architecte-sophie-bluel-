@@ -258,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* =======================
-   RESET UPLOAD BOX
+       UPLOAD BOX
 ======================= */
   function resetUploadBox() {
     const box = document.querySelector(".upload-content");
